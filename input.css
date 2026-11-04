@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .text-gradient { @apply bg-gradient-to-r from-brand-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent; }
+  .eyebrow { @apply mb-3 font-mono text-sm font-medium uppercase tracking-[0.2em] text-brand-500; }
+  .section-title { @apply text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-4xl lg:text-5xl dark:text-white; }
+
+  .btn-primary { @apply inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink-950; }
+  .btn-ghost { @apply inline-flex items-center gap-2 rounded-full border border-zinc-300 px-6 py-3.5 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-500 dark:border-white/15 dark:text-zinc-100; }
+  .social { @apply grid h-11 w-11 place-items-center rounded-full border border-zinc-200 text-zinc-600 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500 hover:bg-brand-500 hover:text-white dark:border-white/10 dark:text-zinc-300; }
+
+  .nav-link { @apply block rounded-full px-4 py-2 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white; }
+  .nav-link.is-active { @apply bg-zinc-900 text-white dark:bg-white/10 dark:text-white; }
+  .mobile-link { @apply block rounded-xl px-4 py-3 font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/5; }
+
+  .card { @apply rounded-2xl border border-zinc-200 bg-white transition-all duration-300 dark:border-white/10 dark:bg-ink-900; }
+  .card-hover { @apply hover:-translate-y-1 hover:border-brand-500/50 hover:shadow-2xl hover:shadow-brand-500/10; }
+  .chip { @apply rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:bg-ink-800 dark:text-zinc-300; }
+  .tag { @apply rounded-md bg-brand-500/10 px-2.5 py-1 font-mono text-xs font-medium text-brand-600 dark:text-brand-400; }
+
+  .filter-btn { @apply rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10; }
+  .filter-btn.is-active { @apply border-transparent bg-zinc-900 text-white hover:text-white dark:bg-white dark:text-zinc-900; }
+
+  .field { @apply relative; }
+  .field input, .field textarea { @apply block w-full resize-none rounded-xl border border-zinc-200 bg-zinc-50 px-4 pb-2.5 pt-6 text-zinc-900 outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 dark:border-white/10 dark:bg-ink-800 dark:text-white dark:focus:bg-ink-800; }
+  .field label { @apply pointer-events-none absolute left-4 top-4 origin-left text-zinc-500 transition-all duration-200; }
+  .field input:focus + label, .field textarea:focus + label,
+  .field input:not(:placeholder-shown) + label, .field textarea:not(:placeholder-shown) + label { @apply top-2 text-xs; }
+  .field input:focus + label, .field textarea:focus + label { @apply text-brand-500; }
+  .field.has-error input, .field.has-error textarea { @apply border-red-500 focus:ring-red-500/15; }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(139 92 246 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(139 92 246 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+.project-card.is-hidden { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
