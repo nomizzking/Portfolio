@@ -1,72 +1,411 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Food Service</title>
-    <style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nauman — Frontend Developer</title>
+  <meta name="description" content="Nauman is a frontend developer crafting fast, accessible and beautiful web experiences with React, Next.js and TypeScript." />
+  <meta property="og:title" content="Nauman — Frontend Developer" />
+  <meta property="og:description" content="Crafting fast, accessible and beautiful web experiences." />
+  <meta name="theme-color" content="#09090b" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%238b5cf6'/><stop offset='1' stop-color='%2306b6d4'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='800' font-size='34' fill='white'>N</text></svg>" />
 
-    </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Theme (before paint, avoids flash) -->
+  <script>
+    try {
+      const t = localStorage.getItem('theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+    } catch (e) {}
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            brand: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
+            ink: { 950: '#09090b', 900: '#0f0f14', 800: '#16161d', 700: '#22222c' },
+          },
+          keyframes: {
+            marquee: { to: { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            blink: { '50%': { opacity: '0' } },
+            blob: {
+              '0%,100%': { transform: 'translate(0,0) scale(1)' },
+              '33%': { transform: 'translate(30px,-40px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px,20px) scale(.95)' },
+            },
+          },
+          animation: {
+            marquee: 'marquee 30s linear infinite',
+            float: 'float 6s ease-in-out infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+            blink: 'blink 1s step-end infinite',
+            blob: 'blob 14s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer components {
+      .text-gradient { @apply bg-gradient-to-r from-brand-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent; }
+      .eyebrow { @apply mb-3 font-mono text-sm font-medium uppercase tracking-[0.2em] text-brand-500; }
+      .section-title { @apply text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-4xl lg:text-5xl dark:text-white; }
+
+      .btn-primary { @apply inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-ink-950; }
+      .btn-ghost { @apply inline-flex items-center gap-2 rounded-full border border-zinc-300 px-6 py-3.5 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-500 dark:border-white/15 dark:text-zinc-100; }
+      .social { @apply grid h-11 w-11 place-items-center rounded-full border border-zinc-200 text-zinc-600 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500 hover:bg-brand-500 hover:text-white dark:border-white/10 dark:text-zinc-300; }
+
+      .nav-link { @apply block rounded-full px-4 py-2 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white; }
+      .nav-link.is-active { @apply bg-zinc-900 text-white dark:bg-white/10 dark:text-white; }
+      .mobile-link { @apply block rounded-xl px-4 py-3 font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/5; }
+
+      .card { @apply rounded-2xl border border-zinc-200 bg-white transition-all duration-300 dark:border-white/10 dark:bg-ink-900; }
+      .card-hover { @apply hover:-translate-y-1 hover:border-brand-500/50 hover:shadow-2xl hover:shadow-brand-500/10; }
+      .chip { @apply rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:bg-ink-800 dark:text-zinc-300; }
+      .tag { @apply rounded-md bg-brand-500/10 px-2.5 py-1 font-mono text-xs font-medium text-brand-600 dark:text-brand-400; }
+
+      .filter-btn { @apply rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10; }
+      .filter-btn.is-active { @apply border-transparent bg-zinc-900 text-white hover:text-white dark:bg-white dark:text-zinc-900; }
+
+      .field { @apply relative; }
+      .field input, .field textarea { @apply peer block w-full resize-none rounded-xl border border-zinc-200 bg-zinc-50 px-4 pb-2.5 pt-6 text-zinc-900 outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/15 dark:border-white/10 dark:bg-ink-800 dark:text-white dark:focus:bg-ink-800; }
+      .field label { @apply pointer-events-none absolute left-4 top-4 origin-left text-zinc-500 transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-brand-500 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs; }
+      .field.has-error input, .field.has-error textarea { @apply border-red-500 focus:ring-red-500/15; }
+    }
+
+    .bg-grid {
+      background-image:
+        linear-gradient(to right, rgb(139 92 246 / 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(139 92 246 / 0.07) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .project-card.is-hidden { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
-<body>
-    <h1>Hotel Food Service</h1>
-    <form action="#" method="post">
-        <fieldset>
-            <legend>Personal Information</legend>
-        <p>
-            <label for="name">Name</label><br>
-            <input type="text" id="name" name="name" placeholder="Write Your Name" required>
-        </p> 
-        <p>
-            <label for="email">Email</label> <br>
-            <input type="email" id="email" name="email" placeholder="Write Your Email Address" required>
-        </p> 
-        <p>
-            <label for="contactnumber">Contact Number</label> <br>
-            <input type="tel" id="contactnumber" name="contactnumber" pattern="03[0-9]{2}-?[0-9]{7}" placeholder="0300-1234567" required>
-        </p>
-        <p>
-        <label for="city">City Name</label> 
-        <select name="city" id="city" required>
-            <option value="" disabled selected>Select Your City</option>
-            <option value="Layyah">Layyah</option>
-            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-            <option value="Multan">Multan</option>
-            <option value="Karachi">Karachi</option>
-            <option value="Islamabad">Islamabad</option>
-            <option value="Rawalpindi">Rawalpindi</option>
-            <option value="Faisalabad">Faisalabad</option>
-        </select>
-        </p>
-        <p>
-            <label for="address">Address</label> 
-            <textarea name="address" id="address" cols="30" rows="10" placeholder="Write Your Address" required></textarea>
-        </p> 
-        </fieldset>
-        <fieldset>
-           <legend>Time&Date</legend>
-        <p>
-        <label for="date">Date</label> <br>
-        <input type="date" name="date" id="date" required>
-        </p>
-        <p>
-            <label for="time">Time</label> <br>
-            <input type="time" id="time" name="time" required>
-        </p>
-        </fieldset>
-        <fieldset>
-            <legend>What type of service is required?</legend>
-        <p>
-            <input type="checkbox" name="service" id="dine-in" value="dine-in">
-            <label for="dine-in">Dine-in</label>
-        </p>
-        <p>
-            <input type="checkbox" name="service" id="delivery" value="delivery">
-            <label for="delivery">Home Delivery</label>
-        </p>
-        </fieldset>
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
-    </form>
+
+<body class="bg-white text-zinc-600 dark:bg-ink-950 dark:text-zinc-400 font-sans antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden">
+
+  <!-- Background decor -->
+  <div class="pointer-events-none fixed inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"></div>
+  <div id="cursorGlow" class="pointer-events-none fixed -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/10 blur-3xl opacity-0 transition-opacity duration-500 hidden md:block"></div>
+
+  <!-- Scroll progress -->
+  <div id="progress" class="fixed left-0 top-0 z-[60] h-0.5 w-0 bg-gradient-to-r from-brand-500 to-cyan-400"></div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+      <a href="#home" class="group flex items-center gap-2.5 font-bold text-zinc-900 dark:text-white">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-cyan-500 text-white shadow-lg shadow-brand-500/30 transition-transform group-hover:rotate-6">N</span>
+        <span class="text-lg tracking-tight">nauman<span class="text-brand-500">.dev</span></span>
+      </a>
+
+      <nav class="hidden md:block" aria-label="Primary">
+        <ul class="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/70 p-1 text-sm font-medium backdrop-blur dark:border-white/10 dark:bg-white/5">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Work</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 text-zinc-700 transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:text-zinc-300" aria-label="Toggle theme">
+          <svg class="hidden h-[18px] w-[18px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a href="#contact" class="btn-primary hidden !px-5 !py-2.5 sm:inline-flex">Hire me</a>
+        <button id="menuBtn" class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 text-zinc-700 md:hidden dark:border-white/10 dark:text-zinc-300" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path id="menuIcon" d="M4 7h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="pointer-events-none mx-4 -translate-y-2 rounded-2xl border border-zinc-200 bg-white/95 p-2 opacity-0 shadow-xl backdrop-blur transition-all duration-300 md:hidden dark:border-white/10 dark:bg-ink-900/95">
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#skills" class="mobile-link">Skills</a>
+      <a href="#projects" class="mobile-link">Work</a>
+      <a href="#experience" class="mobile-link">Experience</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section id="home" class="relative flex min-h-screen items-center pb-20 pt-28">
+      <div class="mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-6 lg:grid-cols-[1.15fr_1fr]">
+        <div>
+          <span class="reveal inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span></span>
+            Available for new projects
+          </span>
+
+          <h1 class="reveal mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-white">
+            Hi, I'm <span class="text-gradient">Nauman</span>.<br />
+            I build <span id="typed" class="text-gradient">interfaces</span><span class="animate-blink font-light text-brand-500">|</span>
+          </h1>
+
+          <p class="reveal mt-6 max-w-xl text-lg leading-relaxed">
+            Frontend developer turning complex ideas into fast, accessible and pixel-perfect web experiences.
+            I care about clean code, smooth motion and the tiny details users feel but rarely notice.
+          </p>
+
+          <div class="reveal mt-9 flex flex-wrap gap-3">
+            <a href="#projects" class="btn-primary group">
+              View my work
+              <svg class="h-[18px] w-[18px] transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="assets/Nauman-CV.pdf" class="btn-ghost" download>
+              <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>
+              Download CV
+            </a>
+          </div>
+
+          <ul class="reveal mt-10 flex items-center gap-3" aria-label="Social links">
+            <li><a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" class="social"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg></a></li>
+            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener" aria-label="X (Twitter)" class="social"><svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4zm-1.2 17.9h1.9L7.1 4.2H5.1L17 20.2z"/></svg></a></li>
+            <li><a href="https://dribbble.com/" target="_blank" rel="noopener" aria-label="Dribbble" class="social"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8.6 2.7c3.6 4.8 6.4 11.4 7.4 18.6M2.1 10.6c5.6.2 11.6-.9 17-4.4M3.6 17.3c3.8-4.6 10.5-6 18.2-3.5"/></svg></a></li>
+            <li class="ml-2 hidden h-px w-16 bg-zinc-300 sm:block dark:bg-white/15"></li>
+            <li class="hidden font-mono text-xs sm:block">Lahore, PK · Remote</li>
+          </ul>
+        </div>
+
+        <!-- Visual -->
+        <div class="reveal relative mx-auto w-full max-w-md lg:max-w-none" aria-hidden="true">
+          <div class="absolute -left-10 top-0 h-72 w-72 animate-blob rounded-full bg-brand-500/40 blur-3xl"></div>
+          <div class="absolute -right-6 bottom-0 h-64 w-64 animate-blob rounded-full bg-cyan-400/30 blur-3xl [animation-delay:-5s]"></div>
+
+          <div id="tilt" class="relative rounded-2xl border border-zinc-200 bg-white/80 shadow-2xl shadow-brand-500/10 backdrop-blur-xl transition-transform duration-200 ease-out dark:border-white/10 dark:bg-ink-900/80">
+            <div class="flex items-center gap-2 border-b border-zinc-200 px-4 py-3 dark:border-white/10">
+              <span class="h-3 w-3 rounded-full bg-red-400"></span>
+              <span class="h-3 w-3 rounded-full bg-amber-400"></span>
+              <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
+              <span class="ml-auto font-mono text-xs text-zinc-400">nauman.tsx</span>
+            </div>
+<pre class="overflow-x-auto p-5 font-mono text-[13px] leading-7 sm:text-sm"><code><span class="text-pink-500">const</span> <span class="text-sky-500">nauman</span> <span class="text-zinc-400">=</span> {
+  <span class="text-brand-500">role</span>: <span class="text-emerald-500">'Frontend Developer'</span>,
+  <span class="text-brand-500">location</span>: <span class="text-emerald-500">'Pakistan 🇵🇰'</span>,
+  <span class="text-brand-500">stack</span>: [<span class="text-emerald-500">'React'</span>, <span class="text-emerald-500">'Next.js'</span>,
+          <span class="text-emerald-500">'TypeScript'</span>, <span class="text-emerald-500">'Tailwind'</span>],
+  <span class="text-brand-500">passion</span>: <span class="text-emerald-500">'pixel-perfect UI'</span>,
+  <span class="text-brand-500">coffee</span>: <span class="text-amber-500">Infinity</span>,
+};
+
+<span class="text-pink-500">export default</span> <span class="text-amber-500">ship</span>(<span class="text-sky-500">nauman</span>);</code></pre>
+          </div>
+
+          <div class="absolute -left-4 -top-6 flex animate-float items-center gap-2 rounded-xl border border-zinc-200 bg-white/90 px-3.5 py-2 text-sm font-semibold text-zinc-800 shadow-lg backdrop-blur sm:-left-8 dark:border-white/10 dark:bg-ink-800/90 dark:text-zinc-100">⚡ 98 Lighthouse</div>
+          <div class="absolute -bottom-6 -right-2 flex animate-float-slow items-center gap-2 rounded-xl border border-zinc-200 bg-white/90 px-3.5 py-2 text-sm font-semibold text-zinc-800 shadow-lg backdrop-blur sm:-right-6 dark:border-white/10 dark:bg-ink-800/90 dark:text-zinc-100">🎨 Design-minded</div>
+        </div>
+      </div>
+
+      <a href="#about" class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block" aria-label="Scroll down">
+        <span class="flex h-10 w-6 justify-center rounded-full border-2 border-zinc-300 pt-2 dark:border-white/20">
+          <span class="h-2 w-1 animate-bounce rounded-full bg-brand-500"></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="relative overflow-hidden border-y border-zinc-200 bg-zinc-50 py-5 dark:border-white/5 dark:bg-ink-900/60 [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]" aria-hidden="true">
+      <div id="marquee" class="flex w-max animate-marquee gap-12 whitespace-nowrap text-xl font-semibold text-zinc-400 dark:text-zinc-500"></div>
+    </div>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="py-24 sm:py-32">
+      <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div class="reveal relative mx-auto aspect-[4/5] w-full max-w-sm">
+          <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border-2 border-brand-500/40"></div>
+          <div class="relative grid h-full w-full place-items-center overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 via-indigo-500 to-cyan-500">
+            <!-- Replace with: <img src="assets/nauman.jpg" alt="Portrait of Nauman" class="h-full w-full object-cover" /> -->
+            <span class="text-[9rem] font-extrabold leading-none text-white/90">N</span>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.35),transparent_50%)]"></div>
+          </div>
+          <div class="absolute -bottom-5 -left-5 rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-xl dark:border-white/10 dark:bg-ink-800">
+            <p class="text-xs uppercase tracking-wider">Based in</p>
+            <p class="font-bold text-zinc-900 dark:text-white">Lahore, Pakistan</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow reveal">About me</p>
+          <h2 class="section-title reveal">Engineering delightful<br class="hidden sm:block" /> digital experiences.</h2>
+          <p class="reveal mt-6 text-lg leading-relaxed">
+            I'm <strong class="text-zinc-900 dark:text-white">Nauman</strong>, a frontend developer who loves the space where design meets engineering.
+            For the past few years I've helped startups and agencies ship products that are fast, accessible and genuinely enjoyable to use.
+          </p>
+          <p class="reveal mt-4 leading-relaxed">
+            My toolkit revolves around <strong class="text-zinc-900 dark:text-white">React, Next.js and TypeScript</strong>, backed by a strong eye for design systems,
+            animation and performance. When I'm not coding, you'll find me exploring new UI trends, contributing to open source, or sipping way too much chai ☕.
+          </p>
+
+          <dl class="mt-10 grid grid-cols-3 gap-4">
+            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
+              <dt class="sr-only">Years of experience</dt>
+              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="3">0</span><span class="text-brand-500">+</span></dd>
+              <dd class="mt-1 text-sm">Years experience</dd>
+            </div>
+            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
+              <dt class="sr-only">Projects delivered</dt>
+              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="40">0</span><span class="text-brand-500">+</span></dd>
+              <dd class="mt-1 text-sm">Projects delivered</dd>
+            </div>
+            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
+              <dt class="sr-only">Happy clients</dt>
+              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="25">0</span><span class="text-brand-500">+</span></dd>
+              <dd class="mt-1 text-sm">Happy clients</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="bg-zinc-50 py-24 sm:py-32 dark:bg-ink-900/50">
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow reveal">What I do</p>
+          <h2 class="section-title reveal">Skills &amp; services</h2>
+          <p class="reveal mt-4 text-lg">A focused toolkit for building modern, scalable frontends.</p>
+        </div>
+
+        <div id="services" class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
+
+        <div id="techGroups" class="mt-16 grid gap-8 sm:grid-cols-2"></div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="eyebrow reveal">Selected work</p>
+            <h2 class="section-title reveal">Featured projects</h2>
+          </div>
+          <div id="filters" class="reveal flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+            <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-btn" data-filter="saas" role="tab" aria-selected="false">SaaS</button>
+            <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web apps</button>
+            <button class="filter-btn" data-filter="ecom" role="tab" aria-selected="false">E-commerce</button>
+          </div>
+        </div>
+
+        <div id="projectGrid" class="mt-12 grid gap-6 md:grid-cols-2"></div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="bg-zinc-50 py-24 sm:py-32 dark:bg-ink-900/50">
+      <div class="mx-auto max-w-4xl px-5 sm:px-6">
+        <div class="text-center">
+          <p class="eyebrow reveal">Career</p>
+          <h2 class="section-title reveal">Experience</h2>
+        </div>
+        <ol id="timeline" class="relative mt-16 space-y-10 border-l border-zinc-200 pl-8 sm:pl-10 dark:border-white/10"></ol>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="testimonials" class="py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <div class="text-center">
+          <p class="eyebrow reveal">Kind words</p>
+          <h2 class="section-title reveal">What clients say</h2>
+        </div>
+        <div id="quotes" class="mt-16 grid gap-6 md:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="pb-24 sm:pb-32">
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <div class="reveal relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-8 shadow-xl sm:p-12 dark:border-white/10 dark:bg-ink-900">
+          <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-cyan-400/15 blur-3xl"></div>
+
+          <div class="relative grid gap-12 lg:grid-cols-2">
+            <div>
+              <p class="eyebrow">Get in touch</p>
+              <h2 class="section-title">Let's build something<br /><span class="text-gradient">amazing together.</span></h2>
+              <p class="mt-5 text-lg leading-relaxed">Have a project in mind or just want to say hi? My inbox is always open — I'll get back to you within 24 hours.</p>
+
+              <ul class="mt-8 space-y-4">
+                <li class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-500"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 7l10 6 10-6"/></svg></span>
+                  <a href="mailto:hello@nauman.dev" class="font-medium text-zinc-900 hover:text-brand-500 dark:text-white">hello@nauman.dev</a>
+                  <button data-copy="hello@nauman.dev" class="ml-1 rounded-lg border border-zinc-200 px-2.5 py-1 text-xs font-medium transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10">Copy</button>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-500"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                  <span class="font-medium text-zinc-900 dark:text-white">Lahore, Pakistan · Remote worldwide</span>
+                </li>
+              </ul>
+            </div>
+
+            <form id="contactForm" class="space-y-5" novalidate>
+              <div class="field">
+                <input id="name" name="name" type="text" placeholder=" " required autocomplete="name" />
+                <label for="name">Your name</label>
+              </div>
+              <div class="field">
+                <input id="email" name="email" type="email" placeholder=" " required autocomplete="email" />
+                <label for="email">Email address</label>
+              </div>
+              <div class="field">
+                <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+                <label for="message">Tell me about your project</label>
+              </div>
+              <button type="submit" class="btn-primary group w-full justify-center">
+                <span>Send message</span>
+                <svg class="h-[18px] w-[18px] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+              <p id="formStatus" class="min-h-[1.25rem] text-sm" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-zinc-200 py-8 dark:border-white/10">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-sm sm:flex-row sm:px-6">
+      <p>© <span id="year"></span> Nauman. Designed &amp; built with <span class="text-pink-500">♥</span></p>
+      <a href="#home" class="font-medium transition hover:text-brand-500">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Back-to-top + toast -->
+  <a href="#home" id="toTop" class="fixed bottom-6 right-6 z-40 grid h-12 w-12 translate-y-4 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-cyan-500 text-white opacity-0 shadow-lg shadow-brand-500/30 transition-all duration-300 pointer-events-none" aria-label="Back to top">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+  <div id="toast" class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-6 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white opacity-0 shadow-xl transition-all duration-300 pointer-events-none dark:bg-white dark:text-zinc-900" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
