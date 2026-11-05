@@ -1,5 +1,5 @@
 /* =========================================================
-   Nauman — Portfolio
+   nouman — Portfolio
    Edit the DATA section below to update site content.
    ========================================================= */
 
@@ -59,11 +59,11 @@ const EXPERIENCE = [
 ];
 
 const TESTIMONIALS = [
-  { quote: 'Nauman turned our rough Figma file into a polished, lightning-fast app. Communication was excellent and every detail was on point.',
+  { quote: 'nouman turned our rough Figma file into a polished, lightning-fast app. Communication was excellent and every detail was on point.',
     name: 'Sarah Khan', role: 'Product Manager, TechNova', color: 'bg-violet-500' },
   { quote: "One of the most reliable developers I've worked with. Clean code, great animations and always ahead of deadlines.",
     name: 'Ahmed Raza', role: 'Founder, PixelCraft', color: 'bg-emerald-500' },
-  { quote: 'Our conversion rate jumped 30% after Nauman rebuilt our storefront. Highly recommended for any frontend work.',
+  { quote: 'Our conversion rate jumped 30% after nouman rebuilt our storefront. Highly recommended for any frontend work.',
     name: 'James Miller', role: 'CEO, Lumen', color: 'bg-pink-500' },
 ];
 
