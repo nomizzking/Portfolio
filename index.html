@@ -45,7 +45,7 @@
 
       <nav class="hidden md:block" aria-label="Primary">
         <ul class="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/70 p-1 text-sm font-medium backdrop-blur dark:border-white/10 dark:bg-white/5">
-          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#projects" class="nav-link">Work</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
@@ -67,7 +67,7 @@
 
     <!-- Mobile menu -->
     <div id="mobileMenu" class="pointer-events-none mx-4 -translate-y-2 rounded-2xl border border-zinc-200 bg-white/95 p-2 opacity-0 shadow-xl backdrop-blur transition-all duration-300 md:hidden dark:border-white/10 dark:bg-ink-900/95">
-      <a href="#about" class="mobile-link">About</a>
+      <a href="about.html" class="mobile-link">About</a>
       <a href="#skills" class="mobile-link">Skills</a>
       <a href="#projects" class="mobile-link">Work</a>
       <a href="#experience" class="mobile-link">Experience</a>
@@ -145,7 +145,7 @@
         </div>
       </div>
 
-      <a href="#about" class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block" aria-label="Scroll down">
+      <a href="about.html" class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block" aria-label="Scroll down">
         <span class="flex h-10 w-6 justify-center rounded-full border-2 border-zinc-300 pt-2 dark:border-white/20">
           <span class="h-2 w-1 animate-bounce rounded-full bg-brand-500"></span>
         </span>
@@ -157,54 +157,7 @@
       <div id="marquee" class="flex w-max animate-marquee gap-12 whitespace-nowrap text-xl font-semibold text-zinc-400 dark:text-zinc-500"></div>
     </div>
 
-    <!-- ================= ABOUT ================= -->
-    <section id="about" class="py-24 sm:py-32">
-      <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-6 lg:grid-cols-[0.85fr_1.15fr]">
-        <div class="reveal relative mx-auto aspect-[4/5] w-full max-w-sm">
-          <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border-2 border-brand-500/40"></div>
-          <div class="relative grid h-full w-full place-items-center overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 via-indigo-500 to-cyan-500">
-            <!-- Replace with: <img src="assets/nouman.jpg" alt="Portrait of nouman" class="h-full w-full object-cover" /> -->
-            <span class="text-[9rem] font-extrabold leading-none text-white/90">N</span>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.35),transparent_50%)]"></div>
-          </div>
-          <div class="absolute -bottom-5 -left-5 rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-xl dark:border-white/10 dark:bg-ink-800">
-            <p class="text-xs uppercase tracking-wider">Based in</p>
-            <p class="font-bold text-zinc-900 dark:text-white">Layyah, Pakistan</p>
-          </div>
-        </div>
-
-        <div>
-          <p class="eyebrow reveal">About me</p>
-          <h2 class="section-title reveal">Engineering delightful<br class="hidden sm:block" /> digital experiences.</h2>
-          <p class="reveal mt-6 text-lg leading-relaxed">
-            I'm <strong class="text-zinc-900 dark:text-white">nouman</strong>, a frontend developer who loves the space where design meets engineering.
-            For the past few years I've helped startups and agencies ship products that are fast, accessible and genuinely enjoyable to use.
-          </p>
-          <p class="reveal mt-4 leading-relaxed">
-            My toolkit revolves around <strong class="text-zinc-900 dark:text-white">React, Next.js and TypeScript</strong>, backed by a strong eye for design systems,
-            animation and performance. When I'm not coding, you'll find me exploring new UI trends, contributing to open source, or sipping way too much chai ☕.
-          </p>
-
-          <dl class="mt-10 grid grid-cols-3 gap-4">
-            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
-              <dt class="sr-only">Years of experience</dt>
-              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="3">0</span><span class="text-brand-500">+</span></dd>
-              <dd class="mt-1 text-sm">Years experience</dd>
-            </div>
-            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
-              <dt class="sr-only">Projects delivered</dt>
-              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="40">0</span><span class="text-brand-500">+</span></dd>
-              <dd class="mt-1 text-sm">Projects delivered</dd>
-            </div>
-            <div class="reveal rounded-2xl border border-zinc-200 p-5 dark:border-white/10">
-              <dt class="sr-only">Happy clients</dt>
-              <dd class="text-3xl font-extrabold text-zinc-900 sm:text-4xl dark:text-white"><span data-count="25">0</span><span class="text-brand-500">+</span></dd>
-              <dd class="mt-1 text-sm">Happy clients</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- ================= SKILLS ================= -->
     <section id="skills" class="bg-zinc-50 py-24 sm:py-32 dark:bg-ink-900/50">
@@ -217,7 +170,7 @@
 
         <div id="services" class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
 
-        <div id="techGroups" class="mt-16 grid gap-8 sm:grid-cols-2"></div>
+        <div id="techGroups" class="mt-16 grid gap-8 sm:grid-cols-2 items-start"></div>
       </div>
     </section>
 

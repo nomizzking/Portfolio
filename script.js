@@ -109,6 +109,7 @@ function render() {
       <p class="mt-2 text-sm leading-relaxed">${esc(s.text)}</p>
     </article>`).join('');
 
+  // FIXED: Only the group wrapper has .reveal. Chips stay clean.
   $('#techGroups').innerHTML = TECH.map((g) => `
     <div class="reveal">
       <h3 class="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-500">${esc(g.group)}</h3>
@@ -158,7 +159,6 @@ function render() {
       </figcaption>
     </figure>`).join('');
 }
-
 /* ---------------------- INTERACTIONS -------------------- */
 function initTheme() {
   $('#themeToggle').addEventListener('click', () => {
@@ -219,13 +219,24 @@ function initReveal() {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
       const el = en.target;
+
       const siblings = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
       el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 6) * 80}ms`;
+
       el.classList.add('is-visible');
       io.unobserve(el);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach((el) => io.observe(el));
+
+  $$('.reveal').forEach((el) => {
+    io.observe(el);
+
+    // Safety net: Reveal immediately if it's already on screen
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('is-visible');
+    }
+  });
 }
 
 function initTyped() {
