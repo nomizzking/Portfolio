@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './script.js'],
+  content: ['./*.html', './script.js'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -21,6 +21,12 @@ module.exports = {
           '33%': { transform: 'translate(30px,-40px) scale(1.1)' },
           '66%': { transform: 'translate(-20px,20px) scale(.95)' },
         },
+        'page-in': { from: { opacity: '0' }, to: { opacity: '1' } },
+        'gradient-x': {
+          '0%,100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        shine: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } },
       },
       animation: {
         marquee: 'marquee 30s linear infinite',
@@ -28,6 +34,8 @@ module.exports = {
         'float-slow': 'float 8s ease-in-out infinite',
         blink: 'blink 1s step-end infinite',
         blob: 'blob 14s ease-in-out infinite',
+        'gradient-x': 'gradient-x 8s ease infinite',
+        shine: 'shine 3s linear infinite',
       },
     },
   },

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Experience — nouman</title>
+  <meta name="description" content="The career timeline of nouman — senior frontend developer working across SaaS, agency and product teams." />
+  <meta property="og:title" content="Experience — nouman" />
+  <meta property="og:description" content="Career timeline, education and certifications." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#09090b" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%238b5cf6'/><stop offset='1' stop-color='%2306b6d4'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='800' font-size='34' fill='white'>N</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Theme -->
+  <script>
+    try {
+      const t = localStorage.getItem('theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+    } catch (e) {}
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important;filter:none !important}</style></noscript>
+</head>
+
+<body id="top" class="bg-white text-zinc-600 dark:bg-ink-950 dark:text-zinc-400 font-sans antialiased selection:bg-brand-500/30 selection:text-white overflow-x-hidden">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Background decor -->
+  <div class="pointer-events-none fixed inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"></div>
+  <div id="cursorGlow" class="pointer-events-none fixed -z-10 hidden h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/10 opacity-0 blur-3xl transition-opacity duration-500 md:block"></div>
+
+  <!-- Scroll progress -->
+  <div id="progress" class="fixed left-0 top-0 z-[60] h-0.5 w-0 bg-gradient-to-r from-brand-500 to-cyan-400"></div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+      <a href="index.html" class="group flex items-center gap-2.5 font-bold text-zinc-900 dark:text-white" aria-label="nouman — home">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-cyan-500 text-white shadow-lg shadow-brand-500/30 transition-transform group-hover:rotate-6">N</span>
+        <span class="text-lg tracking-tight">nouman<span class="text-brand-500">.dev</span></span>
+      </a>
+
+      <nav class="hidden md:block" aria-label="Primary">
+        <ul class="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/70 p-1 text-sm font-medium backdrop-blur dark:border-white/10 dark:bg-white/5">
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="skills.html" class="nav-link">Skills</a></li>
+          <li><a href="work.html" class="nav-link">Work</a></li>
+          <li><a href="experience.html" class="nav-link is-active" aria-current="page">Experience</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 text-zinc-700 transition hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:text-zinc-300" aria-label="Toggle theme" aria-pressed="true">
+          <svg class="hidden h-[18px] w-[18px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a href="contact.html" class="btn-primary hidden !px-5 !py-2.5 sm:inline-flex">Hire me</a>
+        <button id="menuBtn" class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 text-zinc-700 md:hidden dark:border-white/10 dark:text-zinc-300" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path id="menuIcon" d="M4 7h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="pointer-events-none mx-4 -translate-y-2 rounded-2xl border border-zinc-200 bg-white/95 p-2 opacity-0 shadow-xl backdrop-blur transition-all duration-300 md:hidden dark:border-white/10 dark:bg-ink-900/95">
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="skills.html" class="mobile-link">Skills</a>
+      <a href="work.html" class="mobile-link">Work</a>
+      <a href="experience.html" class="mobile-link is-active" aria-current="page">Experience</a>
+      <a href="contact.html" class="mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= PAGE HERO ================= -->
+    <section class="page-hero">
+      <div class="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-cyan-400/15 blur-3xl" data-parallax="0.1"></div>
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <p class="eyebrow reveal">Career</p>
+        <h1 class="page-hero-title reveal max-w-3xl">A short history of<br class="hidden sm:block" /> shipping software.</h1>
+        <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed">
+          Three years of product work across startups and studios — from junior tickets to leading the frontend of a
+          platform used by 50,000+ people.
+        </p>
+        <div class="reveal mt-8 flex flex-wrap gap-3">
+          <a href="Muhammad Nouman CV.pdf" class="btn-primary" download>
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>
+            Download CV
+          </a>
+          <a href="work.html" class="btn-ghost">Browse work</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TIMELINE ================= -->
+    <section class="py-20 sm:py-28">
+      <div class="mx-auto max-w-4xl px-5 sm:px-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="eyebrow reveal">Roles</p>
+            <h2 class="section-title reveal">Where I've worked</h2>
+          </div>
+          <p class="reveal font-mono text-xs uppercase tracking-widest text-zinc-500">2022 — Present</p>
+        </div>
+
+        <ol id="timeline" class="relative mt-14 space-y-10 border-l border-zinc-200 pl-8 sm:pl-10 dark:border-white/10"></ol>
+      </div>
+    </section>
+
+    <!-- ================= HIGHLIGHTS ================= -->
+    <section class="bg-zinc-50 py-20 dark:bg-ink-900/50 sm:py-28">
+      <div class="mx-auto max-w-6xl px-5 sm:px-6">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow reveal">Impact</p>
+          <h2 class="section-title reveal">Numbers, not adjectives.</h2>
+        </div>
+
+        <dl class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="reveal spotlight card p-6" data-reveal="scale">
+            <dt class="text-sm">Users served by shipped products</dt>
+            <dd class="mt-2 text-3xl font-extrabold text-zinc-900 dark:text-white"><span data-count="50">0</span>k+</dd>
+          </div>
+          <div class="reveal spotlight card p-6" data-reveal="scale">
+            <dt class="text-sm">Average Lighthouse gain</dt>
+            <dd class="mt-2 text-3xl font-extrabold text-zinc-900 dark:text-white">+<span data-count="33">0</span></dd>
+          </div>
+          <div class="reveal spotlight card p-6" data-reveal="scale">
+            <dt class="text-sm">Client projects delivered</dt>
+            <dd class="mt-2 text-3xl font-extrabold text-zinc-900 dark:text-white"><span data-count="40">0</span>+</dd>
+          </div>
+          <div class="reveal spotlight card p-6" data-reveal="scale">
+            <dt class="text-sm">Conversion lift on rebuilds</dt>
+            <dd class="mt-2 text-3xl font-extrabold text-zinc-900 dark:text-white"><span data-count="30">0</span>%</dd>
+          </div>
+        </dl>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          <article class="reveal card p-6">
+            <h3 class="font-bold text-zinc-900 dark:text-white">Design system at TechNova</h3>
+            <p class="mt-2 text-sm leading-relaxed">Introduced shared tokens and 40+ components, cutting UI build time roughly in half and making dark mode a config change.</p>
+          </article>
+          <article class="reveal card p-6">
+            <h3 class="font-bold text-zinc-900 dark:text-white">Performance rescue at PixelCraft</h3>
+            <p class="mt-2 text-sm leading-relaxed">Rebuilt bloated marketing pages, moved images to modern formats and raised the average score from 62 to 95.</p>
+          </article>
+          <article class="reveal card p-6">
+            <h3 class="font-bold text-zinc-900 dark:text-white">Checkout rebuild for Lumen</h3>
+            <p class="mt-2 text-sm leading-relaxed">Simplified a five-step checkout into two, added optimistic cart updates and lifted conversion by 30%.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION + CERTS ================= -->
+    <section class="py-20 sm:py-28">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow reveal">Education</p>
+          <h2 class="section-title reveal">Foundations</h2>
+          <div class="reveal card mt-8 p-6" data-reveal="left">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-zinc-900 dark:text-white">BS Computer Science</h3>
+                <p class="mt-1 text-sm">Punjab, Pakistan · 2019 — 2023</p>
+              </div>
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-500"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed">Algorithms, databases and software engineering — plus far too many late-night side projects building interfaces.</p>
+          </div>
+
+          <div class="reveal card mt-4 p-6" data-reveal="left">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-bold text-zinc-900 dark:text-white">Self-directed frontend track</h3>
+                <p class="mt-1 text-sm">Ongoing</p>
+              </div>
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-brand-500"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed">Spec-driven learning: rebuilding products I admire, reading framework source and writing about what I learn.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow reveal">Certifications</p>
+          <h2 class="section-title reveal">Always learning</h2>
+          <ul class="mt-8 space-y-3">
+            <li class="reveal flex items-start gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10" data-reveal="right">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-500/15 text-emerald-500"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span><strong class="block text-zinc-900 dark:text-white">Meta Front-End Developer</strong><span class="text-sm">Coursera · React, UX and responsive design</span></span>
+            </li>
+            <li class="reveal flex items-start gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10" data-reveal="right">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-500/15 text-emerald-500"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span><strong class="block text-zinc-900 dark:text-white">JavaScript Algorithms &amp; Data Structures</strong><span class="text-sm">freeCodeCamp · 300 hours</span></span>
+            </li>
+            <li class="reveal flex items-start gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10" data-reveal="right">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-500/15 text-emerald-500"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span><strong class="block text-zinc-900 dark:text-white">Web Accessibility Fundamentals</strong><span class="text-sm">Google · WCAG, ARIA and assistive tech</span></span>
+            </li>
+            <li class="reveal flex items-start gap-4 rounded-2xl border border-zinc-200 p-5 dark:border-white/10" data-reveal="right">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-500/15 text-emerald-500"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span><strong class="block text-zinc-900 dark:text-white">Advanced React Patterns</strong><span class="text-sm">Epic React · Composition and performance</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="pb-24 sm:pb-32">
+      <div class="mx-auto max-w-3xl px-5 text-center sm:px-6">
+        <h2 class="section-title reveal">Hiring, or just curious?</h2>
+        <p class="reveal mt-4 text-lg">The CV has the short version. A call has the interesting one.</p>
+        <div class="reveal mt-8 flex flex-wrap justify-center gap-3">
+          <a href="contact.html" class="btn-primary">Talk to me</a>
+          <a href="Muhammad Nouman CV.pdf" class="btn-ghost" download>Download CV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-zinc-200 py-10 dark:border-white/10">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6">
+      <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <a href="index.html" class="group flex items-center gap-2.5 font-bold text-zinc-900 dark:text-white">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand-500 to-cyan-500 text-sm text-white shadow-lg shadow-brand-500/30 transition-transform group-hover:rotate-6">N</span>
+          <span>nouman<span class="text-brand-500">.dev</span></span>
+        </a>
+        <nav aria-label="Footer" class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+          <a href="about.html" class="underline-grow transition hover:text-brand-500">About</a>
+          <a href="skills.html" class="underline-grow transition hover:text-brand-500">Skills</a>
+          <a href="work.html" class="underline-grow transition hover:text-brand-500">Work</a>
+          <a href="experience.html" class="underline-grow transition hover:text-brand-500" aria-current="page">Experience</a>
+          <a href="contact.html" class="underline-grow transition hover:text-brand-500">Contact</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="https://github.com/nomizzking/" target="_blank" rel="noopener" aria-label="GitHub" class="grid h-9 w-9 place-items-center rounded-full border border-zinc-200 text-zinc-600 transition hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:text-zinc-300"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg></a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="grid h-9 w-9 place-items-center rounded-full border border-zinc-200 text-zinc-600 transition hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:text-zinc-300"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg></a>
+          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X (Twitter)" class="grid h-9 w-9 place-items-center rounded-full border border-zinc-200 text-zinc-600 transition hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-500 dark:border-white/10 dark:text-zinc-300"><svg class="h-[14px] w-[14px]" viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4zm-1.2 17.9h1.9L7.1 4.2H5.1L17 20.2z"/></svg></a>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col items-center justify-between gap-2 border-t border-zinc-200 pt-6 text-xs sm:flex-row dark:border-white/10">
+        <p>© <span id="year"></span> nouman. Designed &amp; built with <span class="text-pink-500">♥</span></p>
+        <a href="#top" class="font-medium transition hover:text-brand-500">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back-to-top + toast -->
+  <a href="#top" id="toTop" class="pointer-events-none fixed bottom-6 right-6 z-40 grid h-12 w-12 translate-y-4 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-cyan-500 text-white opacity-0 shadow-lg shadow-brand-500/30 transition-all duration-300" aria-label="Back to top">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+  <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-6 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white opacity-0 shadow-xl transition-all duration-300 dark:bg-white dark:text-zinc-900" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
