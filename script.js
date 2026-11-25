@@ -382,7 +382,8 @@ function initCounters() {
 function updateProjectCount() {
   const count = $('#projectCount');
   if (!count) return;
-  const cards = $$('.project-card');
+  const grid = $('#projectGrid') || document;
+  const cards = $$('.project-card', grid);
   const visible = cards.filter((c) => !c.classList.contains('is-hidden')).length;
   count.textContent = `${visible} of ${cards.length} projects`;
 }
@@ -390,18 +391,19 @@ function updateProjectCount() {
 function initFilters() {
   const btns = $$('.filter-btn');
   if (!btns.length) return;
+  const grid = $('#projectGrid') || document;
 
   btns.forEach((b) => b.addEventListener('click', () => {
     btns.forEach((x) => { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', String(x === b)); });
     const f = b.dataset.filter;
-    $$('.project-card').forEach((card) => {
+    $$('.project-card', grid).forEach((card) => {
       const show = f === 'all' || card.dataset.cat === f;
       card.classList.toggle('is-hidden', !show);
       if (show) card.classList.add('is-visible');
     });
     updateProjectCount();
     const empty = $('#emptyState');
-    if (empty) empty.classList.toggle('hidden', $$('.project-card').some((c) => !c.classList.contains('is-hidden')));
+    if (empty) empty.classList.toggle('hidden', $$('.project-card', grid).some((c) => !c.classList.contains('is-hidden')));
   }));
 }
 
